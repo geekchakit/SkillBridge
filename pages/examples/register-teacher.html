@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YashTech-SkillBridge | Teacher Registration Page</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+  <!-- Bootstrap Duallistbox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-duallistbox/4.0.2/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box" style="width: 900px; max-width: 100%;">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="../../index2.html" class="h1"><b>YashTech</b></a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Register as teacher</p>
+
+      <form action="../../index.html" method="post">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Full name" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Qualification" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-graduation-cap"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="tel" class="form-control" placeholder="Mobile Number" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-phone"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="photoInput" accept="image/*" required>
+                <label class="custom-file-label" for="photoInput">Choose photo</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <select class="form-control" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" placeholder="Experience (years)" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-briefcase"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Government ID Number" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-id-card"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="govtIdInput" accept="image/*" required>
+                <label class="custom-file-label" for="govtIdInput">Upload Govt ID Picture</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <select class="form-control" required>
+                <option value="">Max class you can teach</option>
+                <option value="5">Class 5</option>
+                <option value="8">Class 8</option>
+                <option value="10">Class 10</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="PIN Code" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Area" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Landmark" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <textarea class="form-control" rows="3" placeholder="Address" required></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <select class="duallistbox" multiple="multiple">
+                <option>Mathematics</option>
+                <option>Science</option>
+                <option>English</option>
+                <option>History</option>
+                <option>Geography</option>
+                <option>Physics</option>
+                <option>Chemistry</option>
+                <option>Biology</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Password" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Retype password" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+              <label for="agreeTerms">
+               I agree to the <a href="#">terms</a>
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+        </div>
+      </form>
+
+      <a href="login.html" class="text-center">I already have a membership</a>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap Duallistbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-duallistbox/4.0.2/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
+<script>
+  $(function () {
+    $('.duallistbox').bootstrapDualListbox()
+  })
+</script>
+</body>
+</html>
