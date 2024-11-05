@@ -24,9 +24,9 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in as admin</p>
 
-      <form method="post">
+      <form id="loginForm" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" id="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" id="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -70,9 +70,36 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<!-- Axios for API Calls -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   function login() {
-    window.location.href = "../../starter.html";
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Create the request payload
+    const data = {
+      username: email,
+      password: password,
+    };
+
+    // Send the request to the API
+    axios.post('http://localhost:5000/api/admin/login', data)
+      .then(response => {
+        if (response.data.message === "Admin login successful") {
+          // Save the token in a cookie (you can customize the cookie options)
+          document.cookie = `token=${response.data.token}; path=/;`;
+
+          // Redirect to the starter page
+          window.location.href = "../../starter.html";
+        } else {
+          alert('Login failed: ' + response.data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error during login:', error);
+        alert('Error logging in. Please check your credentials and try again.');
+      });
   }
 </script>
 </body>

@@ -307,22 +307,6 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-
   // Function to set the active menu based on localStorage
   function setActiveMenu() {
     const activeMenu = localStorage.getItem('activeMenu');
@@ -358,6 +342,120 @@
 
   // Set active menu on page load
   setActiveMenu();
+
+    // Function to get a specific cookie by name
+    function getCookie(name) {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookieArray = decodedCookie.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i].trim();
+      if (cookie.indexOf(name + "=") === 0) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return "";
+  }
+
+  // Function to check if the token exists and redirect if not
+  function checkToken() {
+    const token = getCookie('token');
+    if (!token) {
+      // If no token is found, redirect to the login page
+      window.location.href = 'index.html';  // Replace with your actual login page path
+    }
+  }
+
+  // Call checkToken function on page load
+  window.onload = checkToken;
+
+  // Function to get the token from cookies
+  function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}()\[\]\/+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+
+  // Function to fetch and display students' data
+  async function fetchStudents() {
+    const token = getCookie('token'); // Replace 'authToken' with the actual cookie name
+    if (!token) {
+      window.location.href = '../../index.html'; // Redirect to login if token is not found
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/students', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch student data');
+      }
+
+      const data = await response.json();
+      displayStudents(data.students);
+    } catch (error) {
+      console.error('Error fetching student data:', error);
+    }
+  }
+
+  // Function to dynamically populate the student data in the table
+  function displayStudents(students) {
+    const tbody = document.querySelector('table tbody');
+    tbody.innerHTML = ''; // Clear the existing rows
+
+    students.forEach(student => {
+      const row = document.createElement('tr');
+      
+      row.innerHTML = `
+        <td>${student.fullName}</td>
+        <td>${student.class}</td>
+        <td><img src="${student.photoUrl}" alt="Photo" style="width:50px;height:auto;"></td>
+        <td>${student.gender}</td>
+        <td>${student.schoolName}</td>
+        <td>${student.motherName}</td>
+        <td>${student.motherContact}</td>
+        <td>${student.fatherName}</td>
+        <td>${student.fatherContact}</td>
+        <td>${student.stream}</td>
+        <td>${student.board}</td>
+        <td>${student.subjects.join(', ')}</td>
+        <td>${student.agreedToTerms ? 'Agreed' : 'Not Agreed'}</td>
+      `;
+      
+      tbody.appendChild(row);
+    });
+
+    // Initialize DataTable after populating data
+    initializeDataTable();
+  }
+
+  function initializeDataTable() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  }
+
+  // Call the function on page load
+  window.onload = fetchStudents;
 </script>
 </body>
 </html>

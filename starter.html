@@ -771,6 +771,31 @@
 
   // Set active menu on page load
   setActiveMenu();
+
+  // Function to get a specific cookie by name
+  function getCookie(name) {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookieArray = decodedCookie.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i].trim();
+      if (cookie.indexOf(name + "=") === 0) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return "";
+  }
+
+  // Function to check if the token exists and redirect if not
+  function checkToken() {
+    const token = getCookie('token');
+    if (!token) {
+      // If no token is found, redirect to the login page
+      window.location.href = 'index.html';  // Replace with your actual login page path
+    }
+  }
+
+  // Call checkToken function on page load
+  window.onload = checkToken;
 </script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
