@@ -253,7 +253,7 @@ const response = await fetch('http://localhost:5000/api/students/register', {
     } else {
       // Handle cases where status is not 201
       console.error(`Unexpected response status: ${response.status}`);
-      alert('There was an error with the form submission. Please try again.');
+      swal("Error!", "An error occurred while registering student!", "error");  
     }
 }
 </script>
