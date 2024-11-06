@@ -84,7 +84,7 @@
     };
 
     // Send the request to the API
-    axios.post('http://localhost:5000/api/admin/login', data)
+    axios.post('https://yashtech-backend.onrender.com/api/admin/login', data)
       .then(response => {
         if (response.data.message === "Admin login successful") {
           // Save the token in a cookie (you can customize the cookie options)
