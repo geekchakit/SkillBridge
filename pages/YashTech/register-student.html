@@ -153,6 +153,28 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" id="pinCode" class="form-control" placeholder="PIN Code" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" id="area" class="form-control" placeholder="Area" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <input type="text" id="landmark" class="form-control" placeholder="Landmark" required>
+            </div>
+          </div>
+        </div>
+  
+        <div class="input-group mb-3">
+          <textarea id="address" class="form-control" rows="3" placeholder="Address" required></textarea>
+        </div>
+
         <!-- Dual List Box for Subjects -->
         <div class="row">
           <div class="col-12">
@@ -226,6 +248,10 @@
   formData.append("gender", document.getElementById("gender").value);
   formData.append("stream", document.getElementById("stream").value);
   formData.append("board", document.getElementById("board").value);
+  formData.append('pinCode', document.getElementById('pinCode').value);
+  formData.append('area', document.getElementById('area').value);
+  formData.append('landmark', document.getElementById('landmark').value);
+  formData.append('address', document.getElementById('address').value);
 
   // Add photo file
   const photoInput = document.getElementById("photoInput");
