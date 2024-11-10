@@ -238,49 +238,81 @@
   const formData = new FormData();
 
   // Gather values from input fields by their IDs
-  formData.append("fullName", document.getElementById("fullName").value);
-  formData.append("class", document.getElementById("class").value);
-  formData.append("schoolName", document.getElementById("schoolName").value);
-  formData.append("motherName", document.getElementById("motherName").value);
-  formData.append("motherContact", document.getElementById("motherContact").value);
-  formData.append("fatherName", document.getElementById("fatherName").value);
-  formData.append("fatherContact", document.getElementById("fatherContact").value);
-  formData.append("gender", document.getElementById("gender").value);
-  formData.append("stream", document.getElementById("stream").value);
-  formData.append("board", document.getElementById("board").value);
-  formData.append('pinCode', document.getElementById('pinCode').value);
-  formData.append('area', document.getElementById('area').value);
-  formData.append('landmark', document.getElementById('landmark').value);
-  formData.append('address', document.getElementById('address').value);
-
-  // Add photo file
+  const fullName = document.getElementById("fullName").value;
+  const classValue = document.getElementById("class").value;
+  const schoolName = document.getElementById("schoolName").value;
+  const motherName = document.getElementById("motherName").value;
+  const motherContact = document.getElementById("motherContact").value;
+  const fatherName = document.getElementById("fatherName").value;
+  const fatherContact = document.getElementById("fatherContact").value;
+  const gender = document.getElementById("gender").value;
+  const stream = document.getElementById("stream").value;
+  const board = document.getElementById("board").value;
+  const pinCode = document.getElementById('pinCode').value;
+  const area = document.getElementById('area').value;
+  const landmark = document.getElementById('landmark').value;
+  const address = document.getElementById('address').value;
   const photoInput = document.getElementById("photoInput");
-  if (photoInput.files.length > 0) {
-    formData.append("photo", photoInput.files[0]);
-  }
-
-  // Gather selected subjects
   const selectedSubjects = Array.from(document.getElementById("subjectsDualList").selectedOptions)
     .map(option => option.value);
+
+  // Validate form fields
+  if (!fullName || !classValue || !schoolName || !motherName || !motherContact || !fatherName || !fatherContact || !gender || !stream || !board || !pinCode || !area || !landmark || !address || selectedSubjects.length === 0 || photoInput.files.length === 0) {
+    swal("Error!", "All fields are required!", "error");
+    return;
+  }
+
+  // Validate file type and size (example: max 2MB)
+  const photoFile = photoInput.files[0];
+  const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+  if (!allowedFileTypes.includes(photoFile.type)) {
+    swal("Error!", "Invalid file type! Only JPEG, PNG, and GIF are allowed.", "error");
+    return;
+  }
+
+  if (photoFile.size > maxFileSize) {
+    swal("Error!", "File size exceeds 2MB!", "error");
+    return;
+  }
+
+  // Append validated values to formData
+  formData.append("fullName", fullName);
+  formData.append("class", classValue);
+  formData.append("schoolName", schoolName);
+  formData.append("motherName", motherName);
+  formData.append("motherContact", motherContact);
+  formData.append("fatherName", fatherName);
+  formData.append("fatherContact", fatherContact);
+  formData.append("gender", gender);
+  formData.append("stream", stream);
+  formData.append("board", board);
+  formData.append('pinCode', pinCode);
+  formData.append('area', area);
+  formData.append('landmark', landmark);
+  formData.append('address', address);
+  formData.append("photo", photoFile);
   formData.append("subjects", JSON.stringify(selectedSubjects)); // Convert array to JSON string
 
-// Perform fetch and wait for response
-const response = await fetch('https://yashtech-backend.onrender.com/api/students/register', {
-      method: 'POST',
-      body: formData,
-    });
+  // Perform fetch and wait for response
+  const response = await fetch('https://yashtech-backend.onrender.com/api/students/register', {
+    method: 'POST',
+    body: formData,
+  });
 
-    // Check if status is 201, which means created/success
-    if (response.status === 201) {
-      const data = await response.json(); // Parse response JSON if needed
-      // console.log('Form submitted successfully:', data);
-      swal("Success!", "Student registered successfully!", "success");
-      $('#registrationForm')[0].reset(); // Reset form fields
-    } else {
-      // Handle cases where status is not 201
-      console.error(`Unexpected response status: ${response.status}`);
-      swal("Error!", "An error occurred while registering student!", "error");  
-    }
+  console.log(response);
+
+  // Check if status is 201, which means created/success
+  if (response.status === 201) {
+    const data = await response.json(); // Parse response JSON if needed
+    swal("Success!", "Student registered successfully!", "success");
+    $('#registrationForm')[0].reset(); // Reset form fields
+  } else {
+    // Handle cases where status is not 201
+    console.error(`Unexpected response status: ${response.status}`);
+    swal("Error!", "An error occurred while registering student!", "error");  
+  }
 }
 </script>
 </body>
